@@ -96,12 +96,18 @@ class Garzones extends Component {
   renderDisplayMenu() {
     return (
       this.state.displayMenu.map(item => {
-        return (
-          <FoodButton 
-            value={item}
-            onClick={() => this.handleClick(item)}       
-          />
-        )
+        if (item === "precio") {
+          return null
+        } else {
+          return (
+            <FoodButton
+              price={this.state.previousMenu[item].precio ? this.state.previousMenu[item].precio : null }
+              key={item}
+              value={item}
+              onClick={() => this.handleClick(item)}       
+            />
+          )
+        }
       })
     )
   }
@@ -123,22 +129,24 @@ class Garzones extends Component {
 
 function FoodButton(props) {
   return (
-    <button className="food-menu" key={props.value} onClick={props.onClick}>{props.value}</button>
+    <button key={props.value} className="food-menu" onClick={props.onClick}>
+    {props.price ? props.value + " $" + props.price : props.value}
+    </button>
   )
 }
 
 function MenuButton(props) {
   if (props.value === 'GARZONES' && props.waitersOn) {
     return (
-      <button className="menu-button-selected" onClick={props.onClick}>{props.value}</button>
+      <button key={props.value} className="menu-button-selected" onClick={props.onClick}>{props.value}</button>
     )
   } else if (props.value === 'COCINA' && !props.waitersOn) {
     return (
-      <button className="menu-button-selected" onClick={props.onClick}>{props.value}</button>
+      <button key={props.value} className="menu-button-selected" onClick={props.onClick}>{props.value}</button>
     )
   } else {
     return (
-      <button className="menu-button" onClick={props.onClick}>{props.value}</button>
+      <button key={props.value} className="menu-button" onClick={props.onClick}>{props.value}</button>
     )
   }
 }
