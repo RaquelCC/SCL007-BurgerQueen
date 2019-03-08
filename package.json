@@ -1,11 +1,27 @@
 {
-  "name": "scl007-burgerqueen",
-  "version": "1.0.0",
-  "description": "Nos acaban de enviar un correo con una solicitud para un nuevo proyecto. Hay un\r restaurante que nos ha contactado porque quieren que alguien les construya una\r interfaz donde puedan tomar pedidos usando una tablet.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "burger-queen",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-scripts": "2.1.5"
   },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RaquelCC/SCL007-BurgerQueen.git"
@@ -15,12 +31,5 @@
   "bugs": {
     "url": "https://github.com/RaquelCC/SCL007-BurgerQueen/issues"
   },
-  "homepage": "https://github.com/RaquelCC/SCL007-BurgerQueen#readme",
-  "devDependencies": {
-    "eslint": "^5.15.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4"
-  }
+  "homepage": "https://github.com/RaquelCC/SCL007-BurgerQueen#readme"
 }
