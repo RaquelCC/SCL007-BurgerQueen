@@ -17,70 +17,70 @@
         "hamburguesas": {
             "simples": {
                 "res": {
-                    "sola": {
+                    "hamburguesa simple res sola": {
                         "precio": 1500
                     },
-                    "con queso": {
+                    "hamburguesa simple res con queso": {
                         "precio": 2000
                     },
-                    "con huevo": {
+                    "hamburguesa simple res con huevo": {
                         "precio": 2000
                     }
                 },
                 "pollo": {
-                    "sola": {
+                    "hamburguesa simple pollo sola": {
                         "precio": 1500
                     },
-                    "con queso": {
+                    "hamburguesa simple pollo con queso": {
                         "precio": 2000
                     },
-                    "con huevo": {
+                    "hamburguesa simple pollo con huevo": {
                         "precio": 2000
                     }
                 },
                 "vegetariana": {
-                    "sola": {
+                    "hamburguesa simple vegetariana sola": {
                         "precio": 1500
                     },
-                    "con queso": {
+                    "hamburguesa simple vegetariana con queso": {
                         "precio": 2000
                     },
-                    "con huevo": {
+                    "hamburguesa simple vegetariana con huevo": {
                         "precio": 2000
                     }
                 }
             },
             "dobles": {
                 "res": {
-                    "sola": {
+                    "hamburguesa doble res sola": {
                         "precio": 2500
                     },
-                    "con queso": {
+                    "hamburguesa doble res con queso": {
                         "precio": 3000
                     },
-                    "con huevo": {
+                    "hamburguesa doble res con huevo": {
                         "precio": 3000
                     }
                 },
                 "pollo": {
-                    "sola": {
+                    "hamburguesa doble pollo sola": {
                         "precio": 2500
                     },
-                    "con queso": {
+                    "hamburguesa doble pollo con queso": {
                         "precio": 3000
                     },
-                    "con huevo": {
+                    "hamburguesa doble pollo con huevo": {
                         "precio": 3000
                     }
                 },
                 "vegetariana": {
-                    "sola": {
+                    "hamburguesa doble vegetariana sola": {
                         "precio": 2500
                     },
-                    "con queso": {
+                    "hamburguesa doble vegetariana con queso": {
                         "precio": 3000
                     },
-                    "con huevo": {
+                    "hamburguesa doble vegetariana con huevo": {
                         "precio": 3000
                     }
                 }

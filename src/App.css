@@ -40,7 +40,6 @@ html {
   display: inline-block;
   margin: auto;
 }
-
 .container-garzones {
   display: flex;
   flex-direction: row;
@@ -52,4 +51,44 @@ p {
   display: flex;
   text-align: center;
   justify-content: center;
+}
+
+.food-menu {
+  display: inline-block;
+  margin: 10px auto;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  border: none;
+  padding: 10px;
+  background-color: rgb(236, 184, 87);
+}
+
+.container-opciones-menu, .container-current-order {
+  width: 50%;
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+}
+
+#customer-name {
+  margin: 10px auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+}
+
+#add-customer-button {
+  display: block;
+  margin: 10px auto;
+  padding: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: coral;
+  border: none;
+  font-size: 20px;
+}
+
+.current-client-name {
+  display: block;
+  margin: 10px auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
 }
