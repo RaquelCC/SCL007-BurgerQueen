@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FoodButton from './foodButtons';
 import CurrentOrder from './currentOrder';
+import ReturnButton from './returnButton';
 
 class Waiters extends Component {
     constructor(props) {
@@ -8,7 +9,8 @@ class Waiters extends Component {
         this.state = {
             menu: props.menu,
             displayMenu: Object.keys(props.menu),
-            previousMenu: props.menu,
+            previousMenu: [(props.menu)],
+            currentMenu: props.menu,
             currentOrder: {
                 customer: null,
                 contents: [],
@@ -17,15 +19,35 @@ class Waiters extends Component {
                 ready: false,
             }
         }
+        this.returnMenu = this.returnMenu.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.renderDisplayMenu = this.renderDisplayMenu.bind(this);
+    }
+
+    returnMenu() {
+        if (this.state.previousMenu.length === 0) {
+            return;
+        }
+        let newPrevious = this.state.previousMenu;
+        let newCurrent = newPrevious.pop();
+        this.setState({
+            ...this.state,
+            displayMenu: Object.keys(newCurrent),
+            currentMenu: newCurrent, 
+            previousMenu: newPrevious,          
+        })
     }
 
     handleClick(item) {
-        if (!this.state.previousMenu[item].precio) {
+        if (!this.state.currentMenu[item].precio) {
             const previousMenu = this.state.previousMenu;
+            const newPrevious = previousMenu.concat([this.state.currentMenu]);
+            const newDisplay = Object.keys(newPrevious[newPrevious.length-1][item])
             this.setState({
                 ...this.state,
-                previousMenu: previousMenu[item],
-                displayMenu: Object.keys(previousMenu[item]),
+                previousMenu: newPrevious,
+                currentMenu: newPrevious[newPrevious.length-1][item],
+                displayMenu: newDisplay,
             })
         } else {
             const newContent = this.state.currentOrder.contents;
@@ -36,8 +58,8 @@ class Waiters extends Component {
                         ...this.state,
                         currentOrder: {
                             ...this.state.currentOrder,
-                            contents: newContent,  //falta hacer que esto se muestre en alguna parte
-                            total: this.state.currentOrder.total+this.state.previousMenu[item].precio,
+                            contents: newContent,
+                            total: this.state.currentOrder.total+this.state.currentMenu[item].precio,
                         }
                     })
                     return;
@@ -45,15 +67,15 @@ class Waiters extends Component {
             }
             newContent.push({
                 itemName: item,
-                price: this.state.previousMenu[item].precio,
+                price: this.state.currentMenu[item].precio,
                 quantity: 1
             });
             this.setState({
                 ...this.state,
                 currentOrder: {
                     ...this.state.currentOrder,
-                    contents: newContent,  //falta hacer que esto se muestre en alguna parte
-                    total: this.state.currentOrder.total+this.state.previousMenu[item].precio,
+                    contents: newContent,
+                    total: this.state.currentOrder.total+this.state.currentMenu[item].precio,
                 }
             })
         }
@@ -67,7 +89,7 @@ class Waiters extends Component {
                 } else {
                     return (
                         <FoodButton
-                            price={this.state.previousMenu[item].precio ? this.state.previousMenu[item].precio : null}
+                            price={this.state.currentMenu[item].precio ? this.state.currentMenu[item].precio : null}
                             key={item}
                             value={item}
                             onClick={() => this.handleClick(item)}
@@ -103,6 +125,9 @@ class Waiters extends Component {
             <div className="container-garzones">
                 <div className="container-opciones-menu">
                     {this.renderDisplayMenu()}
+                    <ReturnButton
+                        onClick={this.returnMenu}
+                    />
                 </div>
                 <div className="container-current-order">
                     <CurrentOrder
