@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FoodButton from './foodButtons';
+import CurrentOrder from './currentOrder';
 
 class Waiters extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class Waiters extends Component {
             currentOrder: {
                 customer: null,
                 contents: [],
+                total: 0,
                 sentToKitchen: false,
                 ready: false,
             }
@@ -27,8 +29,22 @@ class Waiters extends Component {
             })
         } else {
             const newContent = this.state.currentOrder.contents;
+            for (let i = 0; i < newContent.length; i += 1) {
+                if (newContent[i].itemName === item) {
+                    newContent[i].quantity += 1;
+                    this.setState({
+                        ...this.state,
+                        currentOrder: {
+                            ...this.state.currentOrder,
+                            contents: newContent,  //falta hacer que esto se muestre en alguna parte
+                            total: this.state.currentOrder.total+this.state.previousMenu[item].precio,
+                        }
+                    })
+                    return;
+                }
+            }
             newContent.push({
-                itemName : item,
+                itemName: item,
                 price: this.state.previousMenu[item].precio,
                 quantity: 1
             });
@@ -37,6 +53,7 @@ class Waiters extends Component {
                 currentOrder: {
                     ...this.state.currentOrder,
                     contents: newContent,  //falta hacer que esto se muestre en alguna parte
+                    total: this.state.currentOrder.total+this.state.previousMenu[item].precio,
                 }
             })
         }
@@ -88,10 +105,9 @@ class Waiters extends Component {
                     {this.renderDisplayMenu()}
                 </div>
                 <div className="container-current-order">
-                    <div className="current-client-name">
-                        <p>Tomando el pedido de: </p>
-                        <p>{this.state.currentOrder.customer}</p>
-                    </div>
+                    <CurrentOrder
+                    currentOrder={this.state.currentOrder}
+                    />
                 </div>
             </div>
         )

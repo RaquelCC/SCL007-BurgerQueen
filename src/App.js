@@ -11,6 +11,7 @@ class App extends Component {
       orders: [/*{
         customer: null,
         contents: null,
+        total: null,
         sentToKitchen: false,
         ready: false,
       }*/],
