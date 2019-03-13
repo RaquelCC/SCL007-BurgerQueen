@@ -1,0 +1,28 @@
+.container-garzones {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.container-opciones-menu, .container-current-order {
+    width: 50%;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+}
+
+#add-customer-button {
+    display: block;
+    margin: 10px auto;
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: coral;
+    border: none;
+    font-size: 20px;
+}
+
+#customer-name {
+    margin: 10px auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}

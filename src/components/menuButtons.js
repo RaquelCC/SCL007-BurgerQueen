@@ -1,4 +1,5 @@
 import React from 'react';
+import './menuButton.css'
 
 function MenuButton(props) {
     if (props.value === 'GARZONES' && props.waitersOn) {

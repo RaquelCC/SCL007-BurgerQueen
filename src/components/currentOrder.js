@@ -1,4 +1,8 @@
 import React from 'react';
+import FoodButton from './foodButtons';
+
+
+
 
 function CurrentOrder(props) {
     let orderList;
@@ -9,11 +13,14 @@ function CurrentOrder(props) {
                     <td>{foodItem.quantity}</td>
                     <td>{foodItem.itemName}</td>
                     <td>{foodItem.quantity * foodItem.price}</td>
+                    <td><button onClick={() => props.removeItem(foodItem.itemName)}>Eliminar</button></td>
                 </tr>
             )
         })
 
     }
+
+    
     
 
     return (
@@ -31,6 +38,11 @@ function CurrentOrder(props) {
                     <td>{props.currentOrder.total}</td>
                 </tr>
             </table>
+            <FoodButton
+                value="ENVIAR A COCINA"
+                onClick={()=> props.sendToKitchen(props.currentOrder)}
+                order={props.currentOrder}
+            />
         </div>
     )
 

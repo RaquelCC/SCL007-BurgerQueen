@@ -1,4 +1,5 @@
 import React from 'react';
+import './foodButtons.css'
 
 function FoodButton(props) {
     return (

@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import menu from './menu.json';
+import { pedidosRef } from './components/firebase';
 
 
 
-    ReactDOM.render(<App menu={menu}/>, document.getElementById('root'));
+
+
+    ReactDOM.render(<App menu={menu} pedidosRef={pedidosRef}/>, document.getElementById('root'));
 
 
 

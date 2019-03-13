@@ -1,0 +1,11 @@
+.table-card {
+    margin: auto;
+    border: 1px solid rgb(60, 184, 122);
+    padding: 10px;
+    padding-top: 5px;
+    border-radius: 2%;
+}
+
+.table-col {
+    padding: 5px;
+}

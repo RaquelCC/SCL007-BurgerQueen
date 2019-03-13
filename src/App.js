@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Waiters from './components/waiters';
 import MenuButton from './components/menuButtons';
+import Kitchen from './components/kitchen';
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +18,21 @@ class App extends Component {
       }*/],
       waitersOn: true,
       menu:  props.menu,
+      pedidosRef: props.pedidosRef,
+      kitchenOrders: [],
     }
+
+    props.pedidosRef.on("value", snap => {
+      const orders = [];
+      for (let item in snap.val()) {
+          orders.push(snap.val()[item])
+      }
+      this.setState({
+          ...this.state,
+          kitchenOrders: orders,
+      })
+  })
+
   }
 
   handleClick(i) {
@@ -44,6 +59,9 @@ class App extends Component {
     )
   }
 
+ 
+
+
   render() {
     if (this.state.waitersOn){
       return (
@@ -61,13 +79,17 @@ class App extends Component {
       );
     } else {
       return (
-        <div className="app-container">
+        <div className="app-container" key="waiters">
           <div className="menu-content">
             {this.renderMenuButton('GARZONES')}
             {this.renderMenuButton('COCINA')}
           </div>
-          <div className="app-content">
-            {/*aqui deberia ir la app de cocina*/}
+          <div className="app-content" key="kitchen">
+            {!this.state.waitersOn && 
+            <Kitchen
+            kitchenOrders={this.state.kitchenOrders}
+            />
+            }
           </div>
         </div>
       );

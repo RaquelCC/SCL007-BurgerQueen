@@ -1,0 +1,9 @@
+.food-menu {
+    display: inline-block;
+    margin: 10px auto;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+    padding: 10px;
+    background-color: rgb(236, 184, 87);
+}
