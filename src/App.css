@@ -1,7 +1,17 @@
 html {
-  background-color: aliceblue;
+  background-color: #fffafa;
 }
 
+#logo-container {
+  display: flex;
+  height: 130px;
+}
+
+#logo {
+  width: 12%;
+  margin: auto;
+  
+}
 
 .app-container {
   display: flex;

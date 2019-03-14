@@ -4,6 +4,7 @@ import './App.css';
 import Waiters from './components/waiters';
 import MenuButton from './components/menuButtons';
 import Kitchen from './components/kitchen';
+import logo from './img/output-onlinepngtools.png'
 
 class App extends Component {
   constructor(props) {
@@ -65,6 +66,8 @@ class App extends Component {
   render() {
     if (this.state.waitersOn){
       return (
+        <div>
+          <div id="logo-container"><img id="logo" src={logo} alt="logo"></img></div> 
         <div className="app-container">
           <div className="menu-content">
             {this.renderMenuButton('GARZONES')}
@@ -76,9 +79,12 @@ class App extends Component {
             />
           </div>
         </div>
+        </div>
       );
     } else {
       return (
+        <div>
+         <div id="logo-container"><img id="logo" src={logo} alt="logo"></img></div> 
         <div className="app-container" key="waiters">
           <div className="menu-content">
             {this.renderMenuButton('GARZONES')}
@@ -91,6 +97,7 @@ class App extends Component {
             />
             }
           </div>
+        </div>
         </div>
       );
     }

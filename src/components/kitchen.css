@@ -1,9 +1,16 @@
 .table-card {
-    margin: auto;
-    border: 1px solid rgb(60, 184, 122);
+    background: #ffe0e0;
+    margin: 10px auto;
+    border: 1px solid #ffc0d0;
     padding: 10px;
     padding-top: 5px;
     border-radius: 2%;
+    min-width: 40%;
+    max-width: 40%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    box-sizing: content-box;
+    word-break: break-all;
 }
 
 .table-col {

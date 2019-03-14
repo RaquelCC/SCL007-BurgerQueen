@@ -1,19 +1,20 @@
 .menu-button {
     display: block;
     margin: 10px auto;
-    background-color: lightblue;
+    background-color: #ffe0e0;
     border: none;
     font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
+    border-radius: 10px;
   }
   
   .menu-button-selected {
     display: block;
     margin: 10px auto;
-    background-color: lightblue;
-    border: 2px solid rgb(112, 112, 247);
+    background-color: #ffe0e0;
+    border: 3px solid #ffc0d0;
     font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
-    transform: scale(1.30)
+    border-radius: 10px;
   }
   

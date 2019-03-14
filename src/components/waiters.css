@@ -16,13 +16,24 @@
     margin: 10px auto;
     padding: 20px;
     font-family: 'Courier New', Courier, monospace;
-    background-color: coral;
+    background-color: #ffc0d0;
+    border-radius: 10px;
     border: none;
     font-size: 20px;
+}
+
+#add-customer-button:focus {
+    outline: none;
+    border: solid 2px #ff5d9e;
+    border-radius: 10px;
 }
 
 #customer-name {
     margin: 10px auto;
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
+}
+
+#customer-name:focus {
+    outline: 2px solid #ffe0e0
 }

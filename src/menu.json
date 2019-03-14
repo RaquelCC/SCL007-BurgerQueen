@@ -96,18 +96,18 @@
         },
         "bebidas": {
             "500ml": {
-                "agua": {
+                "agua 500ml": {
                     "precio": 500
                 },
-                "gaseosa": {
+                "gaseosa 500ml": {
                     "precio": 700
                 }
             },
             "750ml": {
-                "agua": {
+                "agua 750ml": {
                     "precio": 800
                 },
-                "gaseosa": {
+                "gaseosa 750ml": {
                     "precio": 1000
                 }
             }
