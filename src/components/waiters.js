@@ -12,7 +12,7 @@ class Waiters extends Component {
             menu: props.menu,
             displayMenu: Object.keys(props.menu),
             previousMenu: [(props.menu)],
-            currentMenu: props.menu,    
+            currentMenu: props.menu,
             currentOrder: {
                 customer: null,
                 contents: [],
@@ -40,20 +40,20 @@ class Waiters extends Component {
         this.setState({
             ...this.state,
             displayMenu: Object.keys(newCurrent),
-            currentMenu: newCurrent, 
-            previousMenu: newPrevious,          
+            currentMenu: newCurrent,
+            previousMenu: newPrevious,
         })
     }
 
     handleClick(item) {
-        if (!this.state.currentMenu[item].precio) { 
+        if (!this.state.currentMenu[item].precio) {
             const previousMenu = this.state.previousMenu;
             const newPrevious = previousMenu.concat([this.state.currentMenu]);
-            const newDisplay = Object.keys(newPrevious[newPrevious.length-1][item])
+            const newDisplay = Object.keys(newPrevious[newPrevious.length - 1][item])
             this.setState({
                 ...this.state,
                 previousMenu: newPrevious,
-                currentMenu: newPrevious[newPrevious.length-1][item],
+                currentMenu: newPrevious[newPrevious.length - 1][item],
                 displayMenu: newDisplay,
             })
         } else {
@@ -66,7 +66,7 @@ class Waiters extends Component {
                         currentOrder: {
                             ...this.state.currentOrder,
                             contents: newContent,
-                            total: this.state.currentOrder.total+this.state.currentMenu[item].precio,
+                            total: this.state.currentOrder.total + this.state.currentMenu[item].precio,
                         }
                     })
                     return;
@@ -82,7 +82,7 @@ class Waiters extends Component {
                 currentOrder: {
                     ...this.state.currentOrder,
                     contents: newContent,
-                    total: this.state.currentOrder.total+this.state.currentMenu[item].precio,
+                    total: this.state.currentOrder.total + this.state.currentMenu[item].precio,
                 }
             })
         }
@@ -95,8 +95,19 @@ class Waiters extends Component {
                 ...this.state.currentOrder,
                 sentToKitchen: Date.now(),
             }
-        },()=> {
-            pedidosRef.push(this.state.currentOrder)
+        }, () => {
+            pedidosRef.push(this.state.currentOrder, () => {
+                this.setState({
+                    ...this.state,
+                    currentOrder: {
+                        customer: null,
+                        contents: [],
+                        total: 0,
+                        sentToKitchen: false,
+                        ready: false,
+                    }
+                })
+            })
         })
     }
 
@@ -122,6 +133,7 @@ class Waiters extends Component {
     addCustomer() {
         this.setState({
             ...this.state,
+            inputName: "",
             currentOrder: {
                 ...this.state.currentOrder,
                 customer: this.state.inputName,
@@ -183,9 +195,9 @@ class Waiters extends Component {
                 </div>
                 <div className="container-current-order">
                     <CurrentOrder
-                    currentOrder={this.state.currentOrder}
-                    sendToKitchen={this.sendToKitchen}
-                    removeItem={this.removeItem}
+                        currentOrder={this.state.currentOrder}
+                        sendToKitchen={this.sendToKitchen}
+                        removeItem={this.removeItem}
                     />
                 </div>
             </div>

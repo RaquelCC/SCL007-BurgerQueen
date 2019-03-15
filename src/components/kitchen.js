@@ -8,7 +8,7 @@ function Kitchen(props) {
             return null
         }
 
-        const pendingOrders = props.kitchenOrders.map(foodItem => {
+        const pendingOrders = props.kitchenOrders.map((foodItem, i) => {
             const contents = foodItem.contents.map(item => {
                 return (
                     <tr key={item.itemName}>
@@ -20,8 +20,8 @@ function Kitchen(props) {
             return (
                 <table className="table-card" key={foodItem.sentToKitchen}>
                     <tr key={foodItem.sentToKitchen}>
-                        <td className="table-col"></td>
-                        <td className="table-col">{foodItem.customer}</td>
+                        <td className="table-col index"><div className="order-number">{i+1}</div></td>
+                        <td className="table-col kitchen-customer-name">{foodItem.customer}</td>
                     </tr>
                     {contents}
                 </table>
