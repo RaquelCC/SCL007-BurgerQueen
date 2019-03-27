@@ -4,7 +4,8 @@ import './App.css';
 import Waiters from './components/waiters';
 import MenuButton from './components/menuButtons';
 import Kitchen from './components/kitchen';
-import logo from './img/output-onlinepngtools.png'
+import logo from './img/output-onlinepngtools.png';
+
 
 class App extends Component {
   constructor(props) {
@@ -21,18 +22,60 @@ class App extends Component {
       menu:  props.menu,
       pedidosRef: props.pedidosRef,
       kitchenOrders: [],
+      readyOrders: [],
     }
 
-    props.pedidosRef.on("value", snap => {
+    this.kitchenOrderReady = this.kitchenOrderReady.bind(this);    
+  }
+  
+  componentDidMount() {
+    this.state.pedidosRef.ref().on("value", snap => {
       const orders = [];
+      // console.log(snap.val())
       for (let item in snap.val()) {
-          orders.push(snap.val()[item])
+          let subitem = snap.val()[item];
+          subitem.orderId = item;
+          orders.push(subitem);
       }
-      this.setState({
-          ...this.state,
-          kitchenOrders: orders,
+
+      const paraCocina = orders.filter(item => {
+        return (item.ready === false)
       })
-  })
+      const listos = orders.filter(item => {
+        return (item.ready === true)
+      })
+
+      this.setState({
+        ...this.state,
+        kitchenOrders: paraCocina,
+        readyOrders: listos,
+      })
+    })
+  //   this.props.pedidosRef.ref().orderByChild("ready").equalTo(false).on("value", snap => {
+  //     const orders = [];
+  //     for (let item in snap.val()) {
+  //         let subitem = snap.val()[item];
+  //         subitem.orderId = item;
+  //         orders.push(subitem);
+  //     }
+  //     this.setState({
+  //         ...this.state,
+  //         kitchenOrders: orders,
+  //     },()=> {
+  //       this.props.pedidosRef.ref().orderByChild("ready").equalTo(true).on("value", snap => {
+  //         const orders = [];
+  //         for (let item in snap.val()) {
+  //             let subitem = snap.val()[item];
+  //             subitem.orderId = item;
+  //             orders.push(subitem);
+  //         }
+  //         this.setState({
+  //             ...this.state,
+  //             readyOrders: orders,
+  //         })
+  //     })
+  //     })
+  // })
 
   }
 
@@ -60,6 +103,12 @@ class App extends Component {
     )
   }
 
+  kitchenOrderReady(item) {
+    this.props.pedidosRef.ref(item.orderId).update({
+      ready: true
+    })
+  }
+
  
 
 
@@ -76,6 +125,7 @@ class App extends Component {
           <div className="app-content">
             <Waiters
               menu={this.state.menu}
+              readyOrders={this.state.readyOrders}
             />
           </div>
         </div>
@@ -94,6 +144,7 @@ class App extends Component {
             {!this.state.waitersOn && 
             <Kitchen
             kitchenOrders={this.state.kitchenOrders}
+            kitchenOrderReady={this.kitchenOrderReady}
             />
             }
           </div>

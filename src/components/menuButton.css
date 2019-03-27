@@ -18,3 +18,10 @@
     border-radius: 10px;
   }
   
+  .menu-button:focus {
+    outline: none;
+} 
+
+.menu-button-selected:focus {
+  outline: none;
+}

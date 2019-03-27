@@ -4,6 +4,7 @@ import CurrentOrder from './currentOrder';
 import ReturnButton from './returnButton';
 import { pedidosRef } from './firebase';
 import './waiters.css'
+import ReadyOrders from './readyOrders';
 
 class Waiters extends Component {
     constructor(props) {
@@ -96,7 +97,7 @@ class Waiters extends Component {
                 sentToKitchen: Date.now(),
             }
         }, () => {
-            pedidosRef.push(this.state.currentOrder, () => {
+            pedidosRef.ref().push(this.state.currentOrder, () => {
                 this.setState({
                     ...this.state,
                     currentOrder: {
@@ -178,6 +179,7 @@ class Waiters extends Component {
         if (!this.state.currentOrder.customer) {
             return (
                 <div className="container-garzones">
+                <ReadyOrders ordersReady={this.props.readyOrders} />
                     <div className="container-opciones-menu">
                         <input id="customer-name" placeholder="Nombre" value={this.state.inputName} onChange={this.handleChange}></input>
                         <button id="add-customer-button" onClick={this.addCustomer}>AGREGAR CLIENTE</button>

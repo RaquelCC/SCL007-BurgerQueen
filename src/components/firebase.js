@@ -12,4 +12,4 @@ const config = {
 
 firebase.initializeApp(config);
 
-export const pedidosRef = firebase.database().ref();
+export const pedidosRef = firebase.database();

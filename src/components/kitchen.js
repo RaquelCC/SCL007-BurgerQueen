@@ -24,6 +24,11 @@ function Kitchen(props) {
                         <td className="table-col kitchen-customer-name">{foodItem.customer}</td>
                     </tr>
                     {contents}
+                    <tr>
+                        <td></td>
+                        <td><button className="btn-ready" onClick={()=> props.kitchenOrderReady(foodItem)}>¿Pedido Listo?</button></td>
+                        <td></td>
+                    </tr>
                 </table>
 
             )

@@ -13,7 +13,8 @@ function CurrentOrder(props) {
                     <td>{foodItem.quantity}</td>
                     <td>{foodItem.itemName}</td>
                     <td>{foodItem.quantity * foodItem.price}</td>
-                    <td><button onClick={() => props.removeItem(foodItem.itemName)}>Eliminar</button></td>
+                    {/* eslint-disable-next-line */}
+                    <td><a className="trash-can" onClick={() => props.removeItem(foodItem.itemName)}><i className="material-icons">delete</i></a></td>
                 </tr>
             )
         })
