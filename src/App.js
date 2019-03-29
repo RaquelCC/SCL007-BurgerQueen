@@ -26,6 +26,7 @@ class App extends Component {
     }
 
     this.kitchenOrderReady = this.kitchenOrderReady.bind(this);    
+    this.deliveredOrder = this.deliveredOrder.bind(this);
   }
   
   componentDidMount() {
@@ -42,7 +43,7 @@ class App extends Component {
         return (item.ready === false)
       })
       const listos = orders.filter(item => {
-        return (item.ready === true)
+        return (item.ready === true && !item.delivered)
       })
 
       this.setState({
@@ -51,32 +52,6 @@ class App extends Component {
         readyOrders: listos,
       })
     })
-  //   this.props.pedidosRef.ref().orderByChild("ready").equalTo(false).on("value", snap => {
-  //     const orders = [];
-  //     for (let item in snap.val()) {
-  //         let subitem = snap.val()[item];
-  //         subitem.orderId = item;
-  //         orders.push(subitem);
-  //     }
-  //     this.setState({
-  //         ...this.state,
-  //         kitchenOrders: orders,
-  //     },()=> {
-  //       this.props.pedidosRef.ref().orderByChild("ready").equalTo(true).on("value", snap => {
-  //         const orders = [];
-  //         for (let item in snap.val()) {
-  //             let subitem = snap.val()[item];
-  //             subitem.orderId = item;
-  //             orders.push(subitem);
-  //         }
-  //         this.setState({
-  //             ...this.state,
-  //             readyOrders: orders,
-  //         })
-  //     })
-  //     })
-  // })
-
   }
 
   handleClick(i) {
@@ -109,6 +84,11 @@ class App extends Component {
     })
   }
 
+  deliveredOrder(item) {
+    this.props.pedidosRef.ref(item.orderId).update({
+      delivered: true
+    })
+  }
  
 
 
@@ -124,6 +104,7 @@ class App extends Component {
           </div>
           <div className="app-content">
             <Waiters
+              delivered={this.deliveredOrder}
               menu={this.state.menu}
               readyOrders={this.state.readyOrders}
             />

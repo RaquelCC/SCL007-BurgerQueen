@@ -55,3 +55,9 @@
 .btn-ready {
     outline: none;
 }
+
+.countdown {
+    background-color: #fffafa;
+    padding: 5px;
+    font-weight: 600;
+}

@@ -20,6 +20,7 @@ class Waiters extends Component {
                 total: 0,
                 sentToKitchen: false,
                 ready: false,
+                delivered: false,
             },
             inputName: ''
         }
@@ -179,7 +180,9 @@ class Waiters extends Component {
         if (!this.state.currentOrder.customer) {
             return (
                 <div className="container-garzones">
-                <ReadyOrders ordersReady={this.props.readyOrders} />
+                    <ReadyOrders
+                        onClick={this.props.delivered}
+                        ordersReady={this.props.readyOrders} />
                     <div className="container-opciones-menu">
                         <input id="customer-name" placeholder="Nombre" value={this.state.inputName} onChange={this.handleChange}></input>
                         <button id="add-customer-button" onClick={this.addCustomer}>AGREGAR CLIENTE</button>
@@ -189,6 +192,9 @@ class Waiters extends Component {
         }
         return (
             <div className="container-garzones">
+                <ReadyOrders
+                    onClick={this.props.delivered}
+                    ordersReady={this.props.readyOrders} />
                 <div className="container-opciones-menu">
                     {this.renderDisplayMenu()}
                     <ReturnButton
