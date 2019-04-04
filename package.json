@@ -36,5 +36,9 @@
   "bugs": {
     "url": "https://github.com/RaquelCC/SCL007-BurgerQueen/issues"
   },
-  "homepage": "http://raquelcc.github.io/SCL007-BurgerQueen"
+  "homepage": "http://raquelcc.github.io/SCL007-BurgerQueen",
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2"
+  }
 }
