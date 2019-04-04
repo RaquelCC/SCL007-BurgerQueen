@@ -35,19 +35,8 @@ it('agrega cafe americano', () => {
   })
   waitersComponent.find("#add-customer-button").simulate('click');
   const waitersComponent2 = appComponent.find('Waiters');
-  // waitersComponent.setState({
-  //   ...waitersComponent.state(),
-  //   currentOrder: {
-  //     ...waitersComponent.state().currentOrder,
-  //     customer: 'gatito',
-  //   }
-  // })
-  // waitersComponent.update();
-  // console.log(waitersComponent.state())
   waitersComponent2.find('.food-menu').first().simulate("click");
-
   const waitersComponent3 = appComponent.find('Waiters');
   waitersComponent3.find('.food-menu').first().simulate("click");
-  //console.log(waitersComponent3.state().currentOrder);
   expect(waitersComponent3.state().currentOrder.contents[0].itemName).toBe('cafe americano');
 });
