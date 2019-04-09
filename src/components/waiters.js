@@ -5,6 +5,8 @@ import ReturnButton from './returnButton';
 import { pedidosRef } from './firebase';
 import './waiters.css'
 import ReadyOrders from './readyOrders';
+import { connect } from 'react-redux';
+import { agregarItemMenu } from '../actions/waitersActions';
 
 class Waiters extends Component {
     constructor(props) {
@@ -48,6 +50,7 @@ class Waiters extends Component {
     }
 
     handleClick(item) {
+
         if (!this.state.currentMenu[item].precio) {
             const previousMenu = this.state.previousMenu;
             const newPrevious = previousMenu.concat([this.state.currentMenu]);
@@ -59,10 +62,13 @@ class Waiters extends Component {
                 displayMenu: newDisplay,
             })
         } else {
+            this.props.agregarItemMenuAccion(item, this.state.currentMenu[item].precio, this.props.waitersReducers.currentOrder.contents)
+
             const newContent = this.state.currentOrder.contents;
             for (let i = 0; i < newContent.length; i += 1) {
                 if (newContent[i].itemName === item) {
                     newContent[i].quantity += 1;
+                    // console.log(newContent)
                     this.setState({
                         ...this.state,
                         currentOrder: {
@@ -87,6 +93,7 @@ class Waiters extends Component {
                     total: this.state.currentOrder.total + this.state.currentMenu[item].precio,
                 }
             })
+
         }
     }
 
@@ -213,4 +220,16 @@ class Waiters extends Component {
     }
 }
 
-export default Waiters;
+const mapStateToProps = state => ({
+    ...state
+  });
+  
+  const mapDispatchToProps = dispatch => ({
+    agregarItemMenuAccion: agregarItemMenu(dispatch)
+  });
+  
+  export default
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(Waiters);

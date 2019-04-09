@@ -5,6 +5,8 @@ import Waiters from './components/waiters';
 import MenuButton from './components/menuButtons';
 import Kitchen from './components/kitchen';
 import logo from './img/output-onlinepngtools.png';
+import { connect } from 'react-redux';
+import { agregarItemMenu } from './actions/waitersActions';
 
 
 class App extends Component {
@@ -19,24 +21,24 @@ class App extends Component {
         ready: false,
       }*/],
       waitersOn: true,
-      menu:  props.menu,
+      menu: props.menu,
       pedidosRef: props.pedidosRef,
       kitchenOrders: [],
       readyOrders: [],
     }
 
-    this.kitchenOrderReady = this.kitchenOrderReady.bind(this);    
+    this.kitchenOrderReady = this.kitchenOrderReady.bind(this);
     this.deliveredOrder = this.deliveredOrder.bind(this);
   }
-  
+
   componentDidMount() {
     this.state.pedidosRef.ref().on("value", snap => {
       const orders = [];
       // console.log(snap.val())
       for (let item in snap.val()) {
-          let subitem = snap.val()[item];
-          subitem.orderId = item;
-          orders.push(subitem);
+        let subitem = snap.val()[item];
+        subitem.orderId = item;
+        orders.push(subitem);
       }
 
       const paraCocina = orders.filter(item => {
@@ -70,7 +72,7 @@ class App extends Component {
 
   renderMenuButton(i) {
     return (
-      <MenuButton 
+      <MenuButton
         value={i}
         onClick={() => this.handleClick(i)}
         waitersOn={this.state.waitersOn}
@@ -89,47 +91,47 @@ class App extends Component {
       delivered: true
     })
   }
- 
+
 
 
   render() {
-    if (this.state.waitersOn){
+    if (this.state.waitersOn) {
       return (
         <div>
-          <div id="logo-container"><img id="logo" src={logo} alt="logo"></img></div> 
-        <div className="app-container">
-          <div className="menu-content">
-            {this.renderMenuButton('GARZONES')}
-            {this.renderMenuButton('COCINA')}
+          <div id="logo-container"><img id="logo" src={logo} alt="logo"></img></div>
+          <div className="app-container">
+            <div className="menu-content">
+              {this.renderMenuButton('GARZONES')}
+              {this.renderMenuButton('COCINA')}
+            </div>
+            <div className="app-content">
+              <Waiters
+                delivered={this.deliveredOrder}
+                menu={this.state.menu}
+                readyOrders={this.state.readyOrders}
+              />
+            </div>
           </div>
-          <div className="app-content">
-            <Waiters
-              delivered={this.deliveredOrder}
-              menu={this.state.menu}
-              readyOrders={this.state.readyOrders}
-            />
-          </div>
-        </div>
         </div>
       );
     } else {
       return (
         <div>
-         <div id="logo-container"><img id="logo" src={logo} alt="logo"></img></div> 
-        <div className="app-container" key="waiters">
-          <div className="menu-content">
-            {this.renderMenuButton('GARZONES')}
-            {this.renderMenuButton('COCINA')}
+          <div id="logo-container"><img id="logo" src={logo} alt="logo"></img></div>
+          <div className="app-container" key="waiters">
+            <div className="menu-content">
+              {this.renderMenuButton('GARZONES')}
+              {this.renderMenuButton('COCINA')}
+            </div>
+            <div className="app-content" key="kitchen">
+              {!this.state.waitersOn &&
+                <Kitchen
+                  kitchenOrders={this.state.kitchenOrders}
+                  kitchenOrderReady={this.kitchenOrderReady}
+                />
+              }
+            </div>
           </div>
-          <div className="app-content" key="kitchen">
-            {!this.state.waitersOn && 
-            <Kitchen
-            kitchenOrders={this.state.kitchenOrders}
-            kitchenOrderReady={this.kitchenOrderReady}
-            />
-            }
-          </div>
-        </div>
         </div>
       );
     }
@@ -143,5 +145,16 @@ class App extends Component {
 
 
 
+const mapStateToProps = state => ({
+  ...state
+});
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  agregarItemMenuAccion: agregarItemMenu(dispatch)
+});
+
+export default
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App);
